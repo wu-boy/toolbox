@@ -20,6 +20,7 @@
         <module>toolbox-geometry</module>
         <module>toolbox-io</module>
         <module>toolbox-lang</module>
+        <module>toolbox-nex</module>
         <module>toolbox-regex</module>
         <module>toolbox-web</module>
     </modules>

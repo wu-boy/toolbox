@@ -106,6 +106,50 @@ public class ByteUtils {
         return bbt;
     }
 
+    /**
+     * 二进制字符串转字节数组，如 101000000100100101110000 -> A0 09 70
+     * 参考资料：https://blog.csdn.net/weixin_43145361/article/details/89765906
+     * @param str 输入的字符串
+     * @return 转换好的字节数组
+     */
+    public static byte[] binaryStringToBytes(String str) {
+        StringBuilder in = new StringBuilder(str);
+        // 注：这里in.length() 不可在for循环内调用，因为长度在变化
+        int remainder = in.length() % 8;
+        if (remainder > 0){
+            for (int i = 0; i < 8 - remainder; i++){
+                in.append("0");
+            }
+        }
+
+        byte[] bts = new byte[in.length() / 8];
+
+        // Step 8 Apply compression
+        for (int i = 0; i < bts.length; i++) {
+            bts[i] = (byte) Integer.parseInt(in.substring(i * 8, i * 8 + 8), 2);
+        }
+        return bts;
+    }
+
+    /**
+     * 字节数组转二进制字符串，如 A0 09 70 -> 101000000000100101110000
+     * 参考资料：https://blog.csdn.net/weixin_43145361/article/details/89765906
+     * @param bytes
+     * @return 转换好的只有1和0的字符串
+     */
+    public static String bytesToBinaryString(byte[] bytes) {
+        String[] dic = { "0000", "0001", "0010", "0011", "0100", "0101", "0110", "0111",
+                "1000", "1001", "1010", "1011", "1100", "1101", "1110", "1111" };
+        StringBuilder sb = new StringBuilder();
+        for (byte b : bytes) {
+            String s = String.format("%x", b);
+            s = s.length() == 1? "0" + s: s;
+            sb.append(dic[Integer.parseInt(s.substring(0, 1), 16)]);
+            sb.append(dic[Integer.parseInt(s.substring(1, 2), 16)]);
+        }
+        return sb.toString();
+    }
+
     public static void main(String[] args) {
 
         String str = "20190405120827";
