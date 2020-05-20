@@ -5,7 +5,7 @@ import org.apache.commons.lang3.StringUtils;
 /**
  * 字节工具类
  * @author wusq
- * @date 2019/6/19
+ * @date 2020/5/20
  */
 public class ByteUtils {
 
@@ -148,6 +148,24 @@ public class ByteUtils {
             sb.append(dic[Integer.parseInt(s.substring(1, 2), 16)]);
         }
         return sb.toString();
+    }
+
+    /**
+     * 获取字节高4位值
+     * @param data
+     * @return
+     */
+    public static Integer getHeightFour(byte data){
+        return (data & 0xf0) >> 4;
+    }
+
+    /**
+     * 获取字节低4位值
+     * @param data
+     * @return
+     */
+    public static Integer getLowFour(byte data){
+        return data & 0x0f;
     }
 
     public static void main(String[] args) {
