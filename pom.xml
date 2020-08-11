@@ -20,7 +20,7 @@
         <module>toolbox-geometry</module>
         <module>toolbox-io</module>
         <module>toolbox-lang</module>
-        <module>toolbox-nex</module>
+        <module>toolbox-net</module>
         <module>toolbox-regex</module>
         <module>toolbox-web</module>
     </modules>
@@ -40,6 +40,7 @@
         <guava.version>25.0-jre</guava.version>
         <jackson.version>2.9.8</jackson.version>
         <jts.version>1.13</jts.version>
+        <netty.version>4.1.43.Final</netty.version>
         <poi.ooxml.version>3.15</poi.ooxml.version>
         <shiro.version>1.4.0</shiro.version>
     </properties>
@@ -75,6 +76,11 @@
                 <groupId>com.vividsolutions</groupId>
                 <artifactId>jts</artifactId>
                 <version>${jts.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.netty</groupId>
+                <artifactId>netty-all</artifactId>
+                <version>${netty.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.apache.poi</groupId>
