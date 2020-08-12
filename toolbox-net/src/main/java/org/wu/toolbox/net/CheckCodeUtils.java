@@ -1,11 +1,27 @@
 package org.wu.toolbox.net;
 
+import io.netty.buffer.ByteBuf;
+
 /**
- * CRC校验工具类
+ * 校验码工具类
  * @author wusq
- * @date 2019/5/30
+ * @date 2020/8/12
  */
-public class CrcUtils {
+public class CheckCodeUtils {
+
+    /**
+     * 异或校验，从byteBuf的第index位开始校验
+     * @param byteBuf
+     * @param index 索引位置
+     * @return
+     */
+    public static byte checkCode(ByteBuf byteBuf, Integer index) {
+        byte result = byteBuf.getByte(index);
+        for (int i = index + 1; i < byteBuf.writerIndex(); i++) {
+            result = (byte) (result ^ byteBuf.getByte(i));
+        }
+        return result;
+    }
 
     public static Integer getCrc(byte[] data){
 
