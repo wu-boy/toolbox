@@ -1,11 +1,12 @@
 package org.wu.toolbox.regex;
 
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
  * 正则表达式工具类
  * @author wusq
- * @date 2019/6/26
+ * @date 2020/8/24
  */
 public class RegexUtils {
 
@@ -21,6 +22,22 @@ public class RegexUtils {
      * 邮箱
      */
     public static String EMAIL = "\\w+([-+.]\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*";
+
+    /**
+     * 正则匹配字符串
+     * @param source 字符串
+     * @param patternText 正则表达式
+     * @return
+     */
+    public static String match(String source, String patternText){
+        String result = null;
+        Pattern pattern = Pattern.compile(patternText);
+        Matcher matcher = pattern.matcher(source);
+        if(matcher.find()){
+            result = matcher.group();
+        }
+        return result;
+    }
 
     public static void main(String[] args) {
         boolean match = Pattern.matches(EMAIL, "809791965@qq.com");

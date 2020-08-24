@@ -7,7 +7,7 @@ import java.io.Serializable;
  * @author wusq
  * @date 2019/10/20
  */
-public class WebResult implements Serializable {
+public class HttpResult implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -28,16 +28,16 @@ public class WebResult implements Serializable {
      */
     private Object data;
 
-    public WebResult(){
+    public HttpResult(){
         code = STATUS_CODE_200;
     }
 
-    public WebResult(Object data){
+    public HttpResult(Object data){
         code = STATUS_CODE_200;
         this.data = data;
     }
 
-    public WebResult(Integer code, String message){
+    public HttpResult(Integer code, String message){
         this.code = code;
         this.message = message;
     }
