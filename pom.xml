@@ -16,6 +16,7 @@
     <version>0.0.1-SNAPSHOT</version>
 
     <modules>
+        <module>toolbox-collections</module>
         <module>toolbox-crypto</module>
         <module>toolbox-geometry</module>
         <module>toolbox-io</module>
