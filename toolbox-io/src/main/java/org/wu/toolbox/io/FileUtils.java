@@ -9,6 +9,8 @@ import org.apache.commons.lang3.StringUtils;
 import java.io.Closeable;
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
+import java.net.URLDecoder;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +19,7 @@ import java.util.regex.Pattern;
 /**
  * 文件工具类
  * @author wusq
- * @date 2020/8/23
+ * @date 2020/8/31
  */
 public class FileUtils {
 
@@ -74,10 +76,10 @@ public class FileUtils {
     }
 
     /**
-     * 关闭对象，连接
+     * 关闭对象
      * @param closeable
      */
-    public static void close(final Closeable closeable) {
+    public static void closeQuiet(final Closeable closeable) {
         try {
             if (closeable != null) {
                 closeable.close();
@@ -136,6 +138,25 @@ public class FileUtils {
             }
         }
         result = Boolean.TRUE;
+        return result;
+    }
+
+    /**
+     * 获取jar包运行的路径
+     * @return jar包运行的路径（Linux下未测试）
+     * @throws Exception
+     */
+    public static String getJarPath() throws Exception{
+        String result = null;
+        URL url = FileUtils.class.getProtectionDomain().getCodeSource().getLocation();
+        result = URLDecoder.decode(url.getPath(), Charsets.UTF_8.name());
+        if (result.endsWith(".jar")) {
+            result = result.substring(0, result.lastIndexOf(File.separator) + 1);
+        }
+        File file = new File(result);
+
+        // 得到正确路径
+        result = file.getAbsolutePath() + File.separator;
         return result;
     }
 
@@ -305,8 +326,9 @@ public class FileUtils {
             list = readLines(args[0], Charsets.UTF_8);
         }
         list.forEach(s -> System.out.println(s));*/
-        byte[] bytes = {0x30,0x31,0x63,0x64};
-        append("d:\\test\\a.txt", bytes);
+        /*byte[] bytes = {0x30,0x31,0x63,0x64};
+        append("d:\\test\\a.txt", bytes);*/
+        System.out.println(Charsets.UTF_8.name());
 
     }
 
