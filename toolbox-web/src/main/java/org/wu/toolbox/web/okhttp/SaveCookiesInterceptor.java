@@ -8,11 +8,12 @@ import java.io.IOException;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * 用于从响应头中获取 Cookie
  * @author wusq
- * @date 2020/9/5
+ * @date 2020/9/25
  */
 public class SaveCookiesInterceptor implements Interceptor {
 
@@ -35,21 +36,25 @@ public class SaveCookiesInterceptor implements Interceptor {
         return response;
     }
 
+    /**
+     * 重新处理cookie
+     * @param cookies
+     * @return
+     */
     private String encodeCookie(List<String> cookies) {
-        StringBuilder sb = new StringBuilder();
+        String result = null;
+        if(cookies == null || cookies.isEmpty()){
+            return result;
+        }
         Set<String> set = new HashSet<>();
         for (String cookie : cookies) {
-            System.out.println("每个cookie=" + cookie);
             String[] arr = cookie.split(";");
             for (String s : arr) {
                 set.add(s);
             }
         }
-        for (String cookie : set) {
-            sb.append(cookie).append(";");
-        }
-        sb.deleteCharAt(sb.lastIndexOf(";"));
-        return sb.toString();
+        result = set.stream().collect(Collectors.joining(";"));
+        return result;
     }
 
 }
