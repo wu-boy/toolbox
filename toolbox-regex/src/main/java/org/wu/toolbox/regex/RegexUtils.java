@@ -6,22 +6,31 @@ import java.util.regex.Pattern;
 /**
  * 正则表达式工具类
  * @author wusq
- * @date 2020/8/24
+ * @date 2021/1/20
  */
 public class RegexUtils {
-
-    // 参考资料：正则表达式30分钟入门教程https://deerchao.cn/tutorials/regex/regex.htm
 
     /**
      * 手机号
      */
-    //public static String CELLPHONE = "^(0|86|17951)?(13[0-9]|15[012356789]|166|17[3678]|18[0-9]|14[57])[0-9]{8}$";
+    //public static String MOBILE = "^(0|86|17951)?(13[0-9]|15[012356789]|166|17[3678]|18[0-9]|14[57])[0-9]{8}$";
     public static String CELLPHONE = "1\\d{10}";
 
     /**
      * 邮箱
      */
     public static String EMAIL = "\\w+([-+.]\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*";
+
+
+    /**
+     * 用户名，4到16位，字母数字下划线，减号。
+     */
+    public static String USERNAME = "[-_a-zA-Z0-9]{4,16}";
+
+    /**
+     * 密码，8到16位，字母数字下划线，减号。
+     */
+    public static String PASSWORD = "[-_a-zA-Z0-9]{8,16}";
 
     /**
      * 正则匹配字符串
@@ -40,7 +49,7 @@ public class RegexUtils {
     }
 
     public static void main(String[] args) {
-        boolean match = Pattern.matches(EMAIL, "809791965@qq.com");
+        boolean match = Pattern.matches(EMAIL, "wu.work@qq.com");
         System.out.println(match);
     }
 }
